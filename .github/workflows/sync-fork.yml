@@ -17,12 +17,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Sync from upstream
+      - name: Merge changes from upstream
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/sandeco/reversa.git
           git fetch upstream
           git checkout main
-          git merge --ff-only upstream/main || git reset --hard upstream/main
-          git push origin main --force-with-lease
+          git merge upstream/main --no-edit
+          git push origin main
